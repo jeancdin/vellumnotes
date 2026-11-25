@@ -53,16 +53,6 @@ button:focus-visible{outline:2px solid var(--pri);outline-offset:2px}
 #ttl .tn{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #ttl svg{width:14px;height:14px;color:var(--m);flex:none}
 
-/* Paleta de colores separada (columna vertical a la izquierda de la barra derecha) */
-#pal{right:66px;top:50%;transform:translateY(-50%);flex-direction:column;border-radius:16px;padding:10px 6px;gap:7px;max-height:92vh;box-shadow:-4px 4px 18px rgba(15,23,42,.07);z-index:48}
-.sw{width:22px;height:22px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--bd);transition:transform .1s;flex:none}.sw:hover{transform:scale(1.12)}.sw.on{box-shadow:0 0 0 2.5px var(--pri)}
-.cp-ring{position:relative;width:24px;height:24px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--bd);cursor:pointer;display:inline-block;flex:none;transition:transform .1s}
-.cp-ring:hover{transform:scale(1.12);box-shadow:0 0 0 2px var(--pri)}
-.cp-ring input[type=color]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;border:0;padding:0;margin:0}
-input[type=color]{width:24px;height:24px;border:0;background:none;padding:0;cursor:pointer}
-input[type=range]{width:76px;accent-color:var(--pri);cursor:pointer}
-#pal .v-range,#sub .v-range{writing-mode:vertical-lr;direction:rtl;width:20px;height:74px;padding:0;margin:2px 0}
-
 /* Submenú de cada herramienta: tarjeta con secciones */
 #sub{left:66px;top:50%;transform:translateY(-50%);flex-direction:column;align-items:stretch;justify-content:flex-start;width:190px;border-radius:18px;padding:12px;gap:12px;font-size:12px;flex-wrap:nowrap;max-height:92vh;overflow-y:auto;scrollbar-width:thin;box-shadow:6px 8px 28px rgba(15,23,42,.12);z-index:49}
 #sub button{border:1px solid var(--hv);background:var(--w);color:var(--sl);border-radius:9px;padding:6px 8px;font-size:11.5px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:5px;transition:background .12s,border-color .12s,color .12s}
@@ -92,6 +82,10 @@ input[type=range]{width:76px;accent-color:var(--pri);cursor:pointer}
 #sub .pal button{width:24px;height:24px;min-width:0;min-height:0;padding:0;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--bd)}
 #sub .pal button:hover{transform:scale(1.1)}
 #sub .pal button.on{box-shadow:0 0 0 2px #fff,0 0 0 4px var(--pri)}
+.sw{width:22px;height:22px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--bd);transition:transform .1s;flex:none}.sw:hover{transform:scale(1.12)}.sw.on{box-shadow:0 0 0 2.5px var(--pri)}
+.cp-ring{position:relative;width:24px;height:24px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--bd);cursor:pointer;display:inline-block;flex:none;transition:transform .1s}
+.cp-ring:hover{transform:scale(1.12);box-shadow:0 0 0 2px var(--pri)}
+.cp-ring input[type=color]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;border:0;padding:0;margin:0}
 #sub .cp-ring.cust{background:conic-gradient(#EF4444,#F59E0B,#10B981,#06B6D4,#2563EB,#8B5CF6,#EC4899,#EF4444)}
 #sub .cp-ring.on{box-shadow:0 0 0 2px #fff,0 0 0 4px var(--pri)}
 #sub .rg{display:flex;flex-direction:column;gap:4px}
@@ -99,7 +93,7 @@ input[type=range]{width:76px;accent-color:var(--pri);cursor:pointer}
 #sub .rg .lb span{display:flex;align-items:center;gap:5px}
 #sub .rg .lb svg{width:15px;height:15px}
 #sub .rg .val{color:var(--ink);font-weight:800;font-variant-numeric:tabular-nums}
-#sub input[type=range]{width:100%}
+#sub input[type=range]{width:100%;accent-color:var(--pri);cursor:pointer}
 #sub .tg{width:100%;justify-content:flex-start;padding:7px 9px}
 #sub .tg.on{background:var(--w);border-color:var(--hv);color:var(--ink)}
 .swt{margin-left:auto;width:26px;height:15px;border-radius:8px;background:var(--bd);position:relative;transition:background .15s;flex:none}
@@ -125,7 +119,8 @@ input[type=range]{width:76px;accent-color:var(--pri);cursor:pointer}
 .menu button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:8px 12px;border-radius:8px}.menu button svg{width:17px;height:17px;color:var(--m)}.menu button:hover svg{color:inherit}.menu .dng svg{color:inherit}.menu kbd{margin-left:auto;padding-left:14px;font:inherit;font-size:11px;color:var(--m)}.menu button:hover{background:#EFF6FF;color:var(--priH)}.menu .dng{color:#DC2626}
 .menu hr{border:0;height:1px;background:var(--hv);margin:4px 8px}.menu .sw{display:flex;gap:6px;flex-wrap:wrap;padding:6px 10px;border:0;box-shadow:none;border-radius:0;width:auto;height:auto}.menu .sw button{width:20px;height:20px;border-radius:50%;padding:0;border:2px solid #fff;box-shadow:0 0 0 1px var(--bd)}
 .ov{position:fixed;inset:0;background:#0F172A66;z-index:300;display:grid;place-items:center}
-.mod{background:var(--w);border-radius:16px;padding:20px 22px;width:min(380px,92vw);display:flex;flex-direction:column;gap:10px;font-size:13px}.mod h3{font-size:17px}
+.mod{background:var(--w);border-radius:16px;padding:20px 22px;width:min(390px,92vw);display:flex;flex-direction:column;gap:12px;font-size:13px}.mod h3{font-size:17px}
+.mod-act{display:flex;gap:8px;justify-content:flex-end;margin-top:4px}
 .crop-mod{width:min(640px,94vw)}
 .crop-wrap{position:relative;background:#0F172A;border-radius:12px;overflow:hidden;display:grid;place-items:center;max-height:62vh;padding:12px}
 .crop-box{position:relative;display:inline-block;line-height:0}
@@ -179,7 +174,7 @@ body.cmp #grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
 <aside><div class="brand"><div class="logo">V</div><div><b>VellumNotes</b><small>Tus apuntes a mano</small></div></div>
 <div id="nav"></div>
 <div class="fh"><small>CARPETAS</small><button id="nf" title="Nueva carpeta">+</button></div><div id="fl"></div>
-<div style="flex:1"></div><button class="nb" id="hh">Ayuda (F1)</button><small>Autoguardado activado</small></aside>
+<div style="flex:1"></div><button class="nb" id="bkall" title="Exportar todos los cuadernos como .json"></button><button class="nb" id="hh">Ayuda (F1)</button><small>Autoguardado activado</small></aside>
 <main><small id="greet"></small><h1 id="ht">Documentos</h1><small id="hs"></small>
 <div class="row"><input id="srch" placeholder="Buscar notas…  (Ctrl+F)"><button class="fab" id="add" title="Nueva nota o abrir .json"></button></div>
 <div id="binbar" class="hide"><span style="flex:1">Restaura o elimina de forma permanente.</span><button class="gh" id="emp">Vaciar papelera</button></div>
@@ -1464,12 +1459,18 @@ function menu(x,y,items){closeMenu();const m=document.createElement('div');m.id=
  document.body.append(m);m.style.left=Math.max(6,Math.min(x,innerWidth-m.offsetWidth-6))+'px';m.style.top=Math.max(6,Math.min(y,innerHeight-m.offsetHeight-6))+'px'}
 const closeMenu=()=>{const m=$('#menu');if(m)m.remove()};addEventListener('pointerdown',e=>{if(!e.target.closest('#menu'))closeMenu()},true);
 function modal(h){const o=document.createElement('div');o.className='ov';o.innerHTML=`<div class="mod">${h}<button class="pri" id="mx">Cerrar</button></div>`;o.onclick=e=>{if(e.target==o||e.target.id=='mx')o.remove()};document.body.append(o);return o}
-function moreMenu(){const r=$('#bm').getBoundingClientRect(),p=pg();menu(r.right+8,r.top-120,[{i:'plus',t:'Nueva página   Ctrl+N',fn:()=>addPage()},{i:'dup',t:'Duplicar página',fn:()=>addPage(1)},{i:'goto',t:'Ir a la página…',fn:()=>{const n=parseInt(prompt('Número de página',pi+1));if(n)goPage(n-1)}},{i:'trash',t:'Eliminar página',d:1,fn:delPage},'-',{i:'tplIcon',t:'Cambiar plantilla…',fn:tplDlg},{i:'fit',t:'Ajustar zoom a la hoja   0',fn:center},'-',{i:'save',t:'Guardar cuaderno (.json)',fn:saveJSON},{i:'export',t:'Exportar página como PNG',fn:expPNG},'-',{i:'eraser',t:'Borrar el contenido de la página…',d:1,fn:()=>{if(confirm('¿Borrar todo el contenido de esta página?'))clearPage()}},'-',{i:'help',t:'Ayuda   F1',fn:help}])}
+function moreMenu(){const r=$('#bm').getBoundingClientRect(),p=pg();menu(r.right+8,r.top-120,[{i:'plus',t:'Nueva página   Ctrl+N',fn:()=>addPage()},{i:'dup',t:'Duplicar página',fn:()=>addPage(1)},{i:'goto',t:'Ir a la página…',fn:()=>{const n=parseInt(prompt('Número de página',pi+1));if(n)goPage(n-1)}},{i:'trash',t:'Eliminar página',d:1,fn:delPage},'-',{i:'tplIcon',t:'Cambiar plantilla…',fn:tplDlg},{i:'fit',t:'Ajustar zoom a la hoja   0',fn:center},'-',{i:'save',t:'Guardar cuaderno (.json)',fn:saveJSON},{i:'save',t:'Respaldar todos (.json)',fn:saveAllJSON},{i:'export',t:'Exportar página como PNG',fn:expPNG},'-',{i:'eraser',t:'Borrar el contenido de la página…',d:1,fn:()=>{if(confirm('¿Borrar todo el contenido de esta página?'))clearPage()}},'-',{i:'help',t:'Ayuda   F1',fn:help}])}
 function tplDlg(){const p=pg(),o=modal(`<h3>Plantilla de página</h3><label>Estilo<select id="t1">${[['grid','Cuadrícula'],['lined','Rayado'],['dotted','Puntos'],['blank','En blanco'],['engineering','Ingeniería'],['music','Pentagrama']].map(([v,l])=>`<option value="${v}" ${v==p.style?'selected':''}>${l}</option>`).join('')}</select></label><label>Papel<select id="t2">${[['#FFFFFF','Blanco'],['#FEFCE8','Crema'],['#0F172A','Oscuro']].map(([v,l])=>`<option value="${v}" ${v==p.bg?'selected':''}>${l}</option>`).join('')}</select></label><label>Orientación<select id="t3"><option value="l">Horizontal</option><option value="v" ${p.height>p.width?'selected':''}>Vertical</option></select></label><label>Espaciado<input type="range" id="t4" min="16" max="80" value="${p.spacing}"></label><label>Aplicar a todas las páginas<input type="checkbox" id="t5"></label>`);
  const ap=()=>{const all=o.querySelector('#t5').checked,v=o.querySelector('#t3').value=='v';(all?cur.pages:[p]).forEach(q=>{q.style=o.querySelector('#t1').value;q.bg=o.querySelector('#t2').value;q.spacing=+o.querySelector('#t4').value;q.width=v?820:1120;q.height=v?1160:760});touch();center()};o.oninput=o.onchange=ap}
 function help(){modal(`<h3>Atajos</h3><table><tr><td>G L P B H E S T I R O</td><td>Mano, lazo, bolígrafo, pincel, resaltador, borrador, formas, texto, imagen, geometría, láser</td></tr><tr><td>P · B · H</td><td>Bolígrafo, pincel y resaltador comparten el botón «Escritura»; cambia entre ellos con las pestañas de su menú</td></tr><tr><td>Espacio</td><td>Mover la hoja</td></tr><tr><td>Dos dedos</td><td>Mover y hacer zoom en móvil o tableta. Si usas lápiz táctil, un dedo mueve la hoja</td></tr><tr><td>Ctrl+Z / Ctrl+Y</td><td>Deshacer / rehacer</td></tr><tr><td>Ctrl+N · 0</td><td>Nueva página · ajustar zoom</td></tr><tr><td>Supr · Ctrl+D</td><td>Eliminar · duplicar selección</td></tr><tr><td>Ctrl + rueda</td><td>Zoom (la rueda sola desplaza)</td></tr><tr><td>[ ]</td><td>Grosor o tamaño del borrador</td></tr></table><p>Haz clic de nuevo sobre la herramienta activa para mostrar u ocultar su menú. Mantén quieto el bolígrafo 0,6 s para convertir el trazo en forma perfecta. Haz zig-zag sobre un trazo para borrarlo.</p>`)}
 const dl=(u,n)=>{const a=document.createElement('a');a.href=u;a.download=n;a.click()};
 function saveJSON(){dl(URL.createObjectURL(new Blob([JSON.stringify({app:'VellumNotesWeb',version:2,notes:[cur]},R,1)],{type:'application/json'})),cur.title+'.json')}
+function saveAllJSON(){
+  if(!DB.notes||!DB.notes.length)return;
+  const payload={app:'VellumNotesWeb',version:2,notes:DB.notes};
+  const name=(cur&&cur.title?cur.title:'VellumNotes_respaldo')+'.json';
+  dl(URL.createObjectURL(new Blob([JSON.stringify(payload,R,1)],{type:'application/json'})),name);
+}
 function expPNG(){const p=pg(),o=document.createElement('canvas');o.width=p.width*2;o.height=p.height*2;const c=o.getContext('2d');c.scale(2,2);drawPage(c,p);dl(o.toDataURL('image/png'),`${cur.title}_pag${pi+1}.png`)}
 $('#fj').onchange=e=>{const f=e.target.files[0];e.target.value='';if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);let ns=d.notes?d.notes:d.pages?[{title:f.name.replace(/\.json$/i,''),pages:d.pages}]:[];ns.forEach(n=>DB.notes.push({...newNote(n.title||'Importado',(n.pages||[]).map(p=>newPage(p)).concat([]).length?n.pages.map(p=>newPage(p)):null),color:n.color||NC[0]}));persist();homeRender()}catch(x){alert('Archivo JSON no válido')}};r.readAsText(f)};
 
@@ -1501,7 +1502,7 @@ $('#nav').onclick=$('#fl').onclick=e=>{const b=e.target.closest('[data-f]');if(b
 $('#fl').oncontextmenu=e=>{const b=e.target.closest('[data-fn]');if(!b)return;e.preventDefault();const f=b.dataset.fn;menu(e.clientX,e.clientY,[{i:'trash',t:'Eliminar carpeta (las notas se conservan)',d:1,fn:()=>{DB.folders=DB.folders.filter(x=>x!=f);DB.notes.forEach(n=>{if(n.folder==f)n.folder=''});if(flt=='f:'+f)flt='all';persist();homeRender()}}])};
 $('#nf').onclick=()=>{const v=prompt('Nombre de la carpeta');if(v&&v.trim()&&!DB.folders.includes(v.trim())){DB.folders.push(v.trim());persist();homeRender()}};
 $('#add').innerHTML=ic('plus');$('#add').onclick=e=>{const r=e.currentTarget.getBoundingClientRect();menu(r.right-210,r.bottom+6,[{i:'docs',t:'Crear nota',fn:newNoteHome},{i:'folderPlus',t:'Crear carpeta',fn:()=>$('#nf').click()},{i:'open',t:'Abrir cuaderno (.json)',fn:()=>$('#fj').click()}])};
-$('#en').onclick=newNoteHome;$('#hh').onclick=help;$('#srch').oninput=e=>{q=e.target.value.trim().toLowerCase();homeRender()};
+$('#en').onclick=newNoteHome;$('#hh').onclick=help;$('#bkall').onclick=saveAllJSON;$('#srch').oninput=e=>{q=e.target.value.trim().toLowerCase();homeRender()};
 $('#emp').onclick=()=>{if(confirm('¿Vaciar la papelera?')){DB.notes=DB.notes.filter(n=>!n.bin);persist();homeRender()}};
 function setTitle(){$('#ttl').innerHTML='<span class="tn">'+esc(cur.title)+'</span>'+ic('edit')}
 function openNote(n){cur=n;pi=0;sel=[];selAngle=0;geo=null;subOpen=!compact();n.updated=Date.now();persist();$('#home').classList.add('hide');$('#ed').classList.remove('hide');setTitle();setTool('pen',false);size();center();thumbs()}
@@ -1521,7 +1522,30 @@ addEventListener('keydown',e=>{if(e.key=='F1'){e.preventDefault();help();return}
 addEventListener('keyup',e=>{if(e.code=='Space')space=0});
 setInterval(()=>{if(trail.length){trail=trail.map(p=>({...p,a:p.a-.06})).filter(p=>p.a>.02);render()}},24);
 let _lw=innerWidth;addEventListener('resize',()=>{if(cur){size();if(innerWidth!==_lw||!COARSE)center();_lw=innerWidth}});
-buildTop();$('#hh').innerHTML=ic('help')+'Ayuda (F1)';homeRender();
+function hasUnsavedWork(){
+  return Array.isArray(DB.notes)&&DB.notes.some(n=>!n.bin&&(n.pages||[]).some(p=>(p.strokes&&p.strokes.length)||(p.shapes&&p.shapes.length)||(p.texts&&p.texts.length)||(p.images&&p.images.length)));
+}
+let _exitPromptT=null;
+function askSaveBeforeExit(){
+  if($('.exit-save-mod'))return;
+  const o=document.createElement('div');
+  o.className='ov exit-save-mod';
+  o.innerHTML=`<div class="mod"><h3>¿Guardar copia antes de salir?</h3><p style="color:var(--sl);line-height:1.45">Tus apuntes se guardan en este navegador, pero conviene descargar un archivo <b>.json</b> de respaldo antes de cerrar la pestaña.</p><div class="mod-act"><button class="gh" id="exno">No descargar</button><button class="pri" id="exyes">Descargar .json</button></div></div>`;
+  const close=()=>o.remove();
+  o.onclick=e=>{if(e.target===o)close();};
+  o.querySelector('#exno').onclick=close;
+  o.querySelector('#exyes').onclick=()=>{if(cur)saveJSON();else saveAllJSON();close();};
+  document.body.append(o);
+}
+addEventListener('beforeunload',e=>{
+  if(!hasUnsavedWork())return;
+  clearTimeout(_exitPromptT);
+  _exitPromptT=setTimeout(askSaveBeforeExit,120);
+  e.preventDefault();
+  e.returnValue='Recuerda guardar tu cuaderno como .json antes de cerrar.';
+  return e.returnValue;
+});
+buildTop();$('#bkall').innerHTML=ic('save')+'Respaldo (.json)';$('#hh').innerHTML=ic('help')+'Ayuda (F1)';homeRender();
 const applyMode=()=>{document.body.classList.toggle('cmp',compact());if(cur){placeSub();size();center();sub();thumbs()}};
 mqC.addEventListener('change',applyMode);applyMode();
 /* pulsación larga en carpetas (en móvil no hay clic derecho) */
