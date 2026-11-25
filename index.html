@@ -1510,16 +1510,11 @@ function goHome(){
   commitText();
   if($('#spop'))$('#spop').style.display='none';
   persist();
-  const hadEdits=_noteDirty&&cur;
-  const noteCopy=cur;
   _noteDirty=false;
   $('#ed').classList.add('hide');
   $('#home').classList.remove('hide');
   cur=null;
   homeRender();
-  if(hadEdits){
-    askSaveBeforeExit(noteCopy);
-  }
 }
 
 /* ---------- barra inferior y teclado ---------- */
@@ -1552,7 +1547,7 @@ function askSaveBeforeExit(targetNote=null){
   const active=targetNote||cur;
   const o=document.createElement('div');
   o.className='ov exit-save-mod';
-  o.innerHTML=`<div class="mod"><h3>¿Guardar copia antes de salir?</h3><p style="color:var(--sl);line-height:1.45">Has editado tus apuntes. Aunque se guardan en este navegador, puedes descargar un archivo <b>.json</b> de respaldo ahora.</p><div class="mod-act"><button class="gh" id="exno">No descargar</button><button class="pri" id="exyes">Descargar .json</button></div></div>`;
+  o.innerHTML=`<div class="mod"><h3>¿Deseas guardar como .json antes de cerrar el navegador?</h3><p style="color:var(--sl);line-height:1.45">Has realizado cambios en tus apuntes. Indica si deseas descargar una copia <b>.json</b> ahora.</p><div class="mod-act"><button class="gh" id="exno">No guardar</button><button class="pri" id="exyes">Sí, guardar .json</button></div></div>`;
   const close=()=>o.remove();
   o.onclick=e=>{if(e.target===o)close();};
   o.querySelector('#exno').onclick=close;
@@ -1571,7 +1566,7 @@ addEventListener('beforeunload',e=>{
   clearTimeout(_exitPromptT);
   _exitPromptT=setTimeout(()=>askSaveBeforeExit(cur),100);
   e.preventDefault();
-  e.returnValue='Recuerda guardar tu cuaderno como .json antes de cerrar.';
+  e.returnValue='¿Deseas guardar como .json antes de cerrar el navegador?';
   return e.returnValue;
 });
 buildTop();$('#openjson').innerHTML=ic('open')+'Abrir .json';$('#openjson').onclick=()=>$('#fj').click();$('#openjsonEd').innerHTML=ic('open');$('#openjsonEd').onclick=()=>$('#fj').click();$('#bkall').innerHTML=ic('save')+'Respaldo (.json)';$('#hh').innerHTML=ic('help')+'Ayuda (F1)';homeRender();
