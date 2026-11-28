@@ -46,7 +46,8 @@ h1{font-size:26px;font-weight:800}
 .b.grp::before{content:'';position:absolute;right:4px;top:4px;width:8px;height:8px;border-radius:50%;background:var(--cc,#0F172A);border:1.5px solid #fff;box-shadow:0 0 0 1px rgba(15,23,42,.25)}
 .b.grp::after{content:'';position:absolute;right:3px;bottom:3px;width:0;height:0;border-style:solid;border-width:0 0 6px 6px;border-color:transparent transparent currentColor transparent;opacity:.5}
 button:focus-visible{outline:2px solid var(--pri);outline-offset:2px}
-#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:400;background:#7F1D1D;color:#fff;border-radius:12px;padding:10px 16px;font-size:13px;font-weight:600;max-width:92vw;box-shadow:0 8px 24px rgba(15,23,42,.25);display:flex;gap:12px;align-items:center}
+#toast{position:fixed;left:50%;top:16px;transform:translateX(-50%);z-index:400;background:#0F172A;color:#fff;border-radius:12px;padding:10px 16px;font-size:13px;font-weight:600;max-width:92vw;box-shadow:0 8px 24px rgba(15,23,42,.25);display:flex;gap:12px;align-items:center}
+#toast.err{background:#7F1D1D}
 #toast button{background:#fff2;border-radius:8px;padding:4px 10px;font-weight:700}
 .sp{width:22px;height:1px;background:var(--hv);margin:4px 0;flex:none}
 #botwrap{position:fixed;right:18px;bottom:14px;z-index:50;display:flex;align-items:center;gap:8px;max-width:calc(100vw - 90px);pointer-events:none}
@@ -188,6 +189,18 @@ body #botwrap>.bar span{font-size:12.5px;font-weight:700;padding:0 4px;white-spa
 body #botwrap #bot .sp{width:1px;height:20px;margin:0 2px}
 body #botwrap #ttl .tn{font-weight:700}
 @media (pointer:coarse){body #botwrap>.bar{height:50px}body #botwrap>.bar button:not(.b){height:38px}body #botwrap>.bar .b{width:38px;height:38px}}
+/* colaboración */
+.dot{width:8px;height:8px;border-radius:50%;background:#10B981;display:inline-block;flex:none}
+.mod input[type=text]{padding:8px 10px;border:1px solid var(--bd);border-radius:8px;font:inherit;font-weight:500;width:100%;min-width:0;user-select:text;-webkit-user-select:text;outline:0}
+.mod input[type=text]:focus{border-color:var(--pri)}
+.mod label:has(input[type=text]){flex-direction:column;align-items:stretch;gap:5px}
+.cpl{display:flex;flex-direction:column;gap:2px}
+.cpr{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:13px}
+.cpr i{width:10px;height:10px;border-radius:50%;flex:none}
+.cpr span{margin-left:auto;color:var(--m);font-size:12px}
+.cpr .gh{padding:3px 10px;font-size:12px}
+body.cmp #colbar{top:calc(6px + env(safe-area-inset-top));left:8px}
+body.cmp.colon #ttlbar{max-width:calc(100vw - 150px);left:calc(50% + 34px)}
 </style></head><body>
 <div id="home">
 <aside><div class="brand"><div class="logo">V</div><div><b>VellumNotes</b><small>Tus apuntes a mano</small></div></div>
@@ -195,7 +208,7 @@ body #botwrap #ttl .tn{font-weight:700}
 <div class="fh"><small>CARPETAS</small><button id="nf" title="Nueva carpeta">+</button></div><div id="fl"></div>
 <div style="flex:1"></div><button class="nb" id="hh">Ayuda (F1)</button><small>Autoguardado activado</small></aside>
 <main><small id="greet"></small><h1 id="ht">Documentos</h1><small id="hs"></small>
-<div class="row"><input id="srch" placeholder="Buscar notas…  (Ctrl+F)"><button class="gh" id="openjson" title="Abrir cuaderno guardado (.json)"></button><button class="fab" id="add" title="Nueva nota o abrir .json"></button></div>
+<div class="row"><input id="srch" placeholder="Buscar notas…  (Ctrl+F)"><button class="gh" id="openjson" title="Abrir cuaderno guardado (.json)"></button><button class="gh" id="joinbtn" title="Unirse a una sala en directo"></button><button class="fab" id="add" title="Nueva nota o abrir .json"></button></div>
 <div id="binbar" class="hide"><span style="flex:1">Restaura o elimina de forma permanente.</span><button class="gh" id="emp">Vaciar papelera</button></div>
 <div id="rec" class="hide"><h4>RECIENTES</h4><div class="recs" id="recs"></div></div>
 <h4 id="gh" class="hide">TODOS LOS DOCUMENTOS</h4>
@@ -207,7 +220,7 @@ body #botwrap #ttl .tn{font-weight:700}
 <div class="bar" id="top"></div>
 <div class="bar hide" id="sub"></div>
 <div id="pp" class="hide"><div id="pl"></div><div class="r"><button id="pd">Duplicar</button><button id="px">Eliminar</button></div></div>
-<div id="botwrap"><div class="bar" id="ttlbar"><button id="ttl" title="Renombrar la nota"></button><button class="b" id="openjsonEd" title="Abrir cuaderno guardado (.json)"></button></div>
+<div id="botwrap"><div class="bar hide" id="colbar"><button id="colbtn" title="Sala en directo"></button></div><div class="bar" id="ttlbar"><button id="ttl" title="Renombrar la nota"></button><button class="b" id="openjsonEd" title="Abrir cuaderno guardado (.json)"></button></div>
 <div class="bar" id="bot"><button id="pv">◀</button><span id="pi"></span><button id="nx">▶</button><button id="np">+ Página</button><div class="sp"></div><button id="zo">−</button><span id="zl"></span><button id="zi">+</button><button id="zc">Centrar</button></div></div>
 <div class="spop" id="spop"></div>
 <textarea id="tx" placeholder="Escribe… (toca o haz clic fuera para fijar)"></textarea>
@@ -288,6 +301,7 @@ export:'<path d="M12 15V3M7 8l5-5 5 5"/><path d="M4 15v4a2 2 0 002 2h12a2 2 0 00
 open:'<path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v1"/><path d="M3 10h18l-2 9H5z"/>',
 help:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9.6a2.5 2.5 0 114 2c-.9.6-1.5 1.1-1.5 2.2M12 17h.01"/>',
 goto:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><circle cx="17.5" cy="9" r="2.5"/><path d="M17 14c2.8 0 4.5 1.9 4.5 4.5"/>',
 folderPlus:'<path d="M3 6a2 2 0 012-2h4l2 2h8a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M12 10v6M9 13h6"/>',
 edit:'<path d="M12 20h9"/><path d="M16.4 3.6a2 2 0 012.8 2.8L8 17.6 4 18.5l.9-4z"/>',
 moveTo:'<path d="M3 6a2 2 0 012-2h4l2 2h8a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 13h6M13 10l3 3-3 3"/>',
@@ -305,7 +319,7 @@ function load(){let d;try{d=JSON.parse(localStorage.getItem(K))}catch(e){}
  if(!d||!d.notes){d={notes:[],folders:[]};try{const o=JSON.parse(localStorage.getItem('vellum_web_autosave_v1'));if(Array.isArray(o)&&o.length)d.notes.push(newNote('Cuaderno anterior',o.map(p=>newPage(p))))}catch(e){}}
  d.folders=d.folders||[];d.notes.forEach(n=>n.pages=n.pages.map(p=>newPage(p)));return d}
 const DB=load();let st_t;
-function toast(m,ms=9000){let t=$('#toast');if(t)t.remove();t=document.createElement('div');t.id='toast';t.innerHTML='<span></span><button>OK</button>';t.firstChild.textContent=m;t.lastChild.onclick=()=>t.remove();document.body.append(t);clearTimeout(toast.t);toast.t=setTimeout(()=>t.remove(),ms)}
+function toast(m,ms=9000){let t=$('#toast');if(t)t.remove();t=document.createElement('div');t.id='toast';if(/^⚠|^No se pudo|^No existe|^Error|^Se ha perdido|^Tu navegador|^Código o/.test(m))t.className='err';t.innerHTML='<span></span><button>OK</button>';t.firstChild.textContent=m;t.lastChild.onclick=()=>t.remove();document.body.append(t);clearTimeout(toast.t);toast.t=setTimeout(()=>t.remove(),ms)}
 const idb={db:null,
  open(){return new Promise(res=>{try{const r=indexedDB.open('vellum_web',1);r.onupgradeneeded=()=>r.result.createObjectStore('kv');r.onsuccess=()=>res(this.db=r.result);r.onerror=()=>res(null);r.onblocked=()=>res(null)}catch(e){res(null)}})},
  get(){return new Promise(res=>{if(!this.db)return res(null);try{const q=this.db.transaction('kv').objectStore('kv').get('db');q.onsuccess=()=>res(q.result||null);q.onerror=()=>res(null)}catch(e){res(null)}})},
@@ -695,7 +709,7 @@ function render(){if(!cur)return;const p=pg(),d=devicePixelRatio||1;
  if(p.grow&&drawing&&drawing.o){const pts=drawing.o.points,q=pts?pts[pts.length-1]:drawing.o.p2||(drawing.o.w!=null?{x:drawing.o.x+drawing.o.w,y:drawing.o.y+drawing.o.h}:null);if(q&&growTo(p,q.x,q.y))hud()}
  cx.setTransform(d,0,0,d,0,0);cx.clearRect(0,0,innerWidth,innerHeight);cx.save();cx.translate(V.x,V.y);cx.scale(V.z,V.z);
  cx.save();if(!compact()){cx.shadowColor='rgba(15,23,42,.16)';cx.shadowBlur=24;cx.shadowOffsetY=8}cx.fillStyle=p.bg;cx.fillRect(0,0,p.width,p.height);cx.restore();
- cx.save();cx.beginPath();cx.rect(0,0,p.width,p.height);cx.clip();drawPage(cx,p,{skipBg:1,cur:drawing&&drawing.o});
+ cx.save();cx.beginPath();cx.rect(0,0,p.width,p.height);cx.clip();drawPage(cx,p,{skipBg:1,cur:drawing&&drawing.o});if(COL.on)drawRemoteLive(cx,p);
  if(sel.length){
   if(isSelLockedOnly()){
     const im=sel[0], lb=lockedBadgeBox(im), r=lb.r;
@@ -746,6 +760,7 @@ function render(){if(!cur)return;const p=pg(),d=devicePixelRatio||1;
    cx.restore();
  }
  cx.restore();
+ drawRemoteCursors();
  if(geo) drawGeoInstrument(cx, geo);
  trail.forEach((q,i)=>{if(!i)return;const a=trail[i-1];cx.save();cx.strokeStyle=lc;cx.globalAlpha=q.a;cx.shadowColor=lc;cx.shadowBlur=12;cx.lineWidth=6*q.a;cx.lineCap='round';cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(q.x,q.y);cx.stroke();cx.restore()});
  if(tool=='laser'&&lpos){cx.save();cx.fillStyle=lc;cx.shadowColor=lc;cx.shadowBlur=16;cx.beginPath();cx.arc(lpos.x,lpos.y,5,0,7);cx.fill();cx.restore()}
@@ -756,10 +771,10 @@ function thumbs(){clearTimeout(thumbs.t);thumbs.t=setTimeout(()=>{if(!cur||$('#p
 /* ---------- historial ---------- */
 const state=p=>JSON.stringify({strokes:p.strokes,shapes:p.shapes,texts:p.texts,images:p.images},R);
 let _dirty=false,_noteDirty=false;
-function snap(){const p=pg();(p._u=p._u||[]).push(state(p));if(p._u.length>40)p._u.shift();p._r=[];_dirty=true;_noteDirty=true;}
+function snap(){const p=pg();ensureIds(p);(p._u=p._u||[]).push(state(p));if(p._u.length>40)p._u.shift();p._r=[];_dirty=true;_noteDirty=true;}
 function put(p,s){Object.assign(p,JSON.parse(s));sel=[];selAngle=0;touch();render()}
-function undo(){const p=pg();if(!p._u||!p._u.length)return;(p._r=p._r||[]).push(state(p));put(p,p._u.pop())}
-function redo(){const p=pg();if(!p._r||!p._r.length)return;p._u.push(state(p));put(p,p._r.pop())}
+function undo(){if(RO)return;const p=pg();if(!p._u||!p._u.length)return;(p._r=p._r||[]).push(state(p));put(p,p._u.pop())}
+function redo(){if(RO)return;const p=pg();if(!p._r||!p._r.length)return;p._u.push(state(p));put(p,p._r.pop())}
 const PSZ={l:[1120,760],v:[820,1160],w:[1280,720],xl:[2400,1500]};
 function pageDims(k){if(k=='fit'){const W=1280,H=Math.round(W*innerHeight/innerWidth);return[W,Math.max(500,Math.min(2400,H))]}return PSZ[k]||PSZ.l}
 function growTo(p,x,y){let g=0;if(x>p.width-80&&p.width<8000){p.width=Math.min(8000,Math.round(x+400));g=1}if(y>p.height-80&&p.height<8000){p.height=Math.min(8000,Math.round(y+400));g=1}return g}
@@ -769,8 +784,158 @@ function contentMax(p){let mx=0,my=0;const u=(x,y)=>{if(x>mx)mx=x;if(y>my)my=y};
  p.images.forEach(i=>u(i.x+i.w,i.y+i.h));
  p.texts.forEach(t=>{const L=String(t.text).split('\n');u(t.x+Math.max(...L.map(l=>l.length))*t.size*.6,t.y+L.length*t.size*1.3)});return[mx,my]}
 function autoGrow(p){if(!p||!p.grow)return;const[a,b]=contentMax(p);if(growTo(p,a,b)){hud();render()}}
-function extendPage(dx,dy){const p=pg();p.width=Math.min(8000,p.width+dx);p.height=Math.min(8000,p.height+dy);touch();render()}
-function touch(){if(!cur)return;autoGrow(pg());cur.updated=Date.now();_dirty=true;_noteDirty=true;persist();thumbs()}
+function extendPage(dx,dy){if(RO)return;const p=pg();p.width=Math.min(8000,p.width+dx);p.height=Math.min(8000,p.height+dy);touch();render()}
+/* ---------- colaboración en tiempo real (PeerJS / WebRTC) ---------- */
+const KINDS=['strokes','shapes','texts','images'];
+const COL={on:0,host:0,note:null,peer:null,conns:[],hc:null,me:null,peers:[],ro:0,clock:0,sts:0,ssig:'',dirty:0,dp:new Set(),tk:0,cursors:{},live:{},ls:null,lv:0,code:'',panel:null};
+let RO=false;
+const PEERJS=['https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js','https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js'];
+const PEEROPT={config:{iceServers:[{urls:'stun:stun.l.google.com:19302'},{urls:'stun:stun1.l.google.com:19302'},{urls:'stun:global.stun.twilio.com:3478'}]}};
+const UCOL=['#EF4444','#2563EB','#10B981','#F59E0B','#8B5CF6','#EC4899','#06B6D4','#F97316'];
+const colorFor=id=>UCOL[[...String(id)].reduce((a,c)=>a+c.charCodeAt(0),0)%UCOL.length];
+function loadPeer(){if(window.Peer)return Promise.resolve();return new Promise((res,rej)=>{let i=0;const next=()=>{if(i>=PEERJS.length)return rej(new Error('peerjs'));const sc=document.createElement('script');sc.src=PEERJS[i++];sc.onload=()=>window.Peer?res():next();sc.onerror=()=>{sc.remove();next()};document.head.append(sc)};next()})}
+function peerErr(e){const t=e&&e.type;return t=='peer-unavailable'?'No existe esa sala o el anfitrión ya no está conectado.':t=='network'||t=='server-error'||t=='socket-error'||t=='socket-closed'||t=='timeout'?'No se pudo conectar con el servidor de conexión. Revisa tu red e inténtalo de nuevo.':t=='browser-incompatible'?'Tu navegador no admite conexiones en tiempo real.':'Error de conexión'+(t?' ('+t+')':'')+'.'}
+const myName=()=>{try{return localStorage.getItem('vellum_name')||''}catch(e){return ''}};
+const setMyName=v=>{try{localStorage.setItem('vellum_name',v)}catch(e){}};
+const nextTs=()=>COL.clock=Math.max(COL.clock+1,Date.now());
+const vgt=(a,b)=>a[0]>b[0]||(a[0]==b[0]&&a[1]>b[1]);
+function ensureIds(p){const seen=new Set();KINDS.forEach(k=>p[k].forEach(o=>{if(!o.id||seen.has(o.id))o.id=uid();seen.add(o.id)}))}
+function ensurePageIds(n){const seen=new Set();n.pages.forEach(q=>{if(!q.id||seen.has(q.id))q.id=uid();seen.add(q.id)})}
+function sigO(k,o){if(k=='strokes'){const P=o.points,a=P[0],b=P[P.length-1];return P.length+'|'+(a?a.x+','+a.y:'')+'|'+(b?b.x+','+b.y:'')+'|'+o.color+o.thickness+o.opacity+o.kind+o.cap+o.nib+o.dash}
+ if(k=='images'){const{src,...r}=o;return JSON.stringify(r,R)+'|'+srcSig(o)}return JSON.stringify(o,R)}
+const srcSig=o=>o.src?o.src.length+o.src.slice(-24):'';
+const ordOf=p=>KINDS.reduce((a,k)=>(a[k]=p[k].map(o=>o.id).join(','),a),{});
+function metaOf(q){const m={id:q.id,width:q.width,height:q.height,style:q.style,bg:q.bg,spacing:q.spacing};if(q.size)m.size=q.size;m.grow=q.grow?1:0;return m}
+const structSig=n=>JSON.stringify([n.title,n.pages.map(metaOf)]);
+function primeSig(p){ensureIds(p);p._sig={};p._ver={};p._isrc={};KINDS.forEach(k=>p[k].forEach(o=>{const key=k+':'+o.id;p._sig[key]=sigO(k,o);p._ver[key]=[0,''];if(k=='images'&&o.src)p._isrc[o.id]=srcSig(o)}));p._ord=ordOf(p)}
+function diffPage(p,ts){ensureIds(p);const old=p._sig||(p._sig={}),ver=p._ver||(p._ver={}),isrc=p._isrc||(p._isrc={}),now={},set=[],del=[];
+ KINDS.forEach(k=>p[k].forEach(o=>{const key=k+':'+o.id,sg=sigO(k,o);now[key]=1;if(old[key]!==sg){old[key]=sg;ver[key]=[ts,COL.me.id];const c=JSON.parse(JSON.stringify(o,R));if(k=='images'){const ss=srcSig(o);if(isrc[o.id]===ss)delete c.src;else isrc[o.id]=ss}set.push({k,o:c})}}));
+ Object.keys(old).forEach(key=>{if(!now[key]){delete old[key];ver[key]=[ts,COL.me.id];del.push(key)}});
+ const cur0=p._ord||{},nw=ordOf(p),ord={};let oc=0;KINDS.forEach(k=>{if(cur0[k]!==nw[k]){ord[k]=p[k].map(o=>o.id);oc=1}});p._ord=nw;
+ return set.length||del.length||oc?{t:'diff',pid:p.id,ts,set,del,ord:oc?ord:null}:null}
+function colRefresh(){const n=COL.note;if(!n)return;n.updated=Date.now();if(cur===n){hud();render();thumbs()}persist()}
+function applyDiff(m){const n=COL.note,p=n&&n.pages.find(q=>q.id==m.pid);if(!p)return;COL.clock=Math.max(COL.clock,m.ts||0);
+ const old=p._sig||(p._sig={}),ver=p._ver||(p._ver={}),isrc=p._isrc||(p._isrc={}),v=[m.ts,m.by||''];
+ (m.set||[]).forEach(({k,o})=>{if(!KINDS.includes(k)||!o||!o.id)return;const key=k+':'+o.id;if(ver[key]&&vgt(ver[key],v))return;
+  let ex=p[k].find(x=>x.id==o.id);
+  if(ex){Object.keys(ex).forEach(q=>{if(q[0]!='_'&&!(q=='src'&&o.src===undefined))delete ex[q]});Object.assign(ex,o);if(k=='images'&&o.src!==undefined)ex._i=null}
+  else{ex=o;p[k].push(ex)}
+  ver[key]=v;old[key]=sigO(k,ex);if(k=='images'&&ex.src)isrc[ex.id]=srcSig(ex)});
+ (m.del||[]).forEach(key=>{if(ver[key]&&vgt(ver[key],v))return;const i=key.indexOf(':'),k=key.slice(0,i),id=key.slice(i+1);if(!KINDS.includes(k))return;const j=p[k].findIndex(x=>x.id==id);if(j>=0)p[k].splice(j,1);delete old[key];ver[key]=v});
+ if(m.ord)KINDS.forEach(k=>{if(!m.ord[k])return;const ix=new Map(m.ord[k].map((id,i)=>[id,i]));p[k].sort((a,b)=>(ix.has(a.id)?ix.get(a.id):1e9)-(ix.has(b.id)?ix.get(b.id):1e9))});
+ p._ord=ordOf(p);
+ if(cur===n&&pg()===p)sel=sel.filter(o=>KINDS.some(k=>p[k].includes(o)));
+ colRefresh()}
+function applyStruct(m){const n=COL.note;if(!n||m.ts<COL.sts)return;COL.sts=m.ts;COL.clock=Math.max(COL.clock,m.ts);
+ const curId=cur===n&&n.pages[pi]?n.pages[pi].id:null,byId=new Map(n.pages.map(q=>[q.id,q]));
+ const np=m.pages.map(mt=>{let q=byId.get(mt.id);if(q)Object.assign(q,mt);else{q=newPage(mt);q._sig={};q._ver={};q._isrc={};q._ord=ordOf(q)}return q});
+ n.pages.forEach(q=>{if(!q._sig&&!np.includes(q))np.push(q)});
+ n.pages=np;if(m.title!=null)n.title=m.title;COL.ssig=structSig(n);
+ if(cur===n){pi=Math.max(0,n.pages.findIndex(q=>q.id==curId));setTitle()}
+ colRefresh()}
+function applyCursor(m){COL.cursors[m.id]={pid:m.pid,x:m.x,y:m.y,l:m.l,t:Date.now()};const u=COL.peers.find(x=>x.id==m.id);if(u)u.pid=m.pid;reqRender()}
+function applyLive(m){if(m.end){delete COL.live[m.id];reqRender();return}
+ if(m.k=='stroke'){let L=COL.live[m.id];if(!L||L.k!='stroke'||m.meta)L=COL.live[m.id]={pid:m.pid,k:'stroke',o:{...(m.meta||{color:'#0F172A',thickness:3,opacity:1,kind:'pen',cap:'round',nib:'ball',dash:'solid'}),points:[]}};(m.pts||[]).forEach(q=>L.o.points.push(q))}
+ else if(m.k=='shape')COL.live[m.id]={pid:m.pid,k:'shape',o:m.o};reqRender()}
+let _rr=0;const reqRender=()=>{if(_rr||!cur)return;_rr=requestAnimationFrame(()=>{_rr=0;render()})};
+function drawRemoteLive(c,p){Object.values(COL.live).forEach(L=>{if(L.pid!==p.id||!L.o)return;try{if(L.k=='stroke'){if(L.o.points.length)stroke(c,L.o,p.bg)}else shape(c,L.o,p.bg)}catch(e){}})}
+function drawRemoteCursors(){if(!COL.on||!cur||cur!==COL.note)return;const pid=pg().id,k=1/V.z,now=Date.now();
+ Object.entries(COL.cursors).forEach(([id,c])=>{if(c.pid!==pid||now-c.t>8000)return;const u=COL.peers.find(x=>x.id==id)||{name:'?',color:'#2563EB'};
+  cx.save();cx.translate(c.x,c.y);cx.scale(k,k);
+  if(c.l){cx.fillStyle=u.color;cx.shadowColor=u.color;cx.shadowBlur=14;cx.beginPath();cx.arc(0,0,6,0,7);cx.fill();cx.shadowBlur=0}
+  else{cx.fillStyle=u.color;cx.strokeStyle='#fff';cx.lineWidth=1.5;cx.beginPath();cx.moveTo(0,0);cx.lineTo(0,17);cx.lineTo(4.6,13);cx.lineTo(8.5,21);cx.lineTo(11,20);cx.lineTo(7.2,12.2);cx.lineTo(12.5,12.2);cx.closePath();cx.fill();cx.stroke()}
+  cx.font='700 11px Segoe UI,system-ui,sans-serif';const w=cx.measureText(u.name).width+12;cx.fillStyle=u.color;cx.beginPath();cx.roundRect?cx.roundRect(12,c.l?6:18,w,18,6):cx.rect(12,c.l?6:18,w,18);cx.fill();cx.fillStyle='#fff';cx.textBaseline='middle';cx.fillText(u.name,18,(c.l?6:18)+9);cx.restore()})}
+/* envío */
+function send(m,except){try{if(COL.host)COL.conns.forEach(c=>{if(c!==except&&c.open)c.send(m)});else if(COL.hc&&COL.hc.open)COL.hc.send(m)}catch(e){}}
+function colSend(heavy){const n=COL.note;ensurePageIds(n);
+ const ss=structSig(n);if(ss!==COL.ssig){const ts=nextTs();COL.sts=ts;COL.ssig=ss;send({t:'struct',ts,by:COL.me.id,title:n.title,pages:n.pages.map(metaOf)})}
+ const set=new Set(COL.dp);COL.dp.clear();n.pages.forEach(q=>{if(!q._sig)set.add(q)});if(heavy&&cur===n)set.add(pg());
+ set.forEach(q=>{if(!n.pages.includes(q))return;const m=diffPage(q,nextTs());if(m){m.by=COL.me.id;send(m)}})}
+function colLive(){const d=drawing,on=!RO&&d&&(d.t=='stroke'||d.t=='shape')&&d.o&&cur===COL.note;
+ if(on){const pid=pg().id;if(d.t=='stroke'){const P=d.o.points,first=!COL.ls||COL.ls.o!==d.o;if(first)COL.ls={o:d.o,n:0};if(P.length>COL.ls.n){let meta;if(first){const{points,...r}=d.o;meta=JSON.parse(JSON.stringify(r))}send({t:'live',id:COL.me.id,pid,k:'stroke',meta,pts:P.slice(COL.ls.n)});COL.ls.n=P.length}}
+  else send({t:'live',id:COL.me.id,pid,k:'shape',o:JSON.parse(JSON.stringify(d.o,R))});COL.lv=1}
+ else if(COL.lv){send({t:'live',id:COL.me.id,end:1});COL.lv=0;COL.ls=null}}
+setInterval(()=>{if(!COL.on||!COL.note)return;
+ if(!RO){const heavy=(drawing&&drawing.t!='stroke'&&drawing.t!='shape'&&drawing.t!='lasso')||rsz||rotDrag;
+  if(COL.dirty||COL.dp.size||(heavy&&++COL.tk%3==0)||structSig(COL.note)!==COL.ssig||COL.note.pages.some(q=>!q._sig)){COL.dirty=0;colSend(heavy)}}
+ colLive()},100);
+let _cs=0;cv.addEventListener('pointermove',e=>{if(!COL.on||!cur||cur!==COL.note)return;const t=performance.now();if(t-_cs<40)return;_cs=t;const q=toDoc(e.clientX,e.clientY);send({t:'cur',id:COL.me.id,pid:pg().id,x:Math.round(q.x),y:Math.round(q.y),l:tool=='laser'?1:0})});
+/* anfitrión */
+function hostConn(c){c.on('data',m=>hostData(c,m));c.on('close',()=>hostLeave(c));c.on('error',()=>hostLeave(c))}
+function hostData(c,m){if(!m||!m.t)return;
+ if(m.t=='hi'){if(!COL.conns.includes(c))COL.conns.push(c);const id=c.peer,u={id,name:String(m.name||'Invitado').slice(0,24),color:colorFor(id),pid:null};COL.peers=COL.peers.filter(x=>x.id!=id).concat(u);
+  ensurePageIds(COL.note);colSend(0);
+  c.send({t:'hello',you:id,title:COL.note.title,pages:JSON.parse(JSON.stringify(COL.note.pages,R)),ro:COL.ro,peers:COL.peers,ts:COL.clock});
+  send({t:'peers',list:COL.peers});colUI();toast(u.name+' se ha unido a la sala',3500);return}
+ if(!COL.conns.includes(c))return;
+ if(m.t=='diff'||m.t=='struct'){if(COL.ro)return;m.by=c.peer;if(m.t=='diff')applyDiff(m);else applyStruct(m);send(m,c)}
+ else if(m.t=='cur'){m.id=c.peer;applyCursor(m);send(m,c)}
+ else if(m.t=='live'){if(COL.ro)return;m.id=c.peer;applyLive(m);send(m,c)}}
+function hostLeave(c){const i=COL.conns.indexOf(c);if(i<0)return;COL.conns.splice(i,1);const u=COL.peers.find(x=>x.id==c.peer);COL.peers=COL.peers.filter(x=>x.id!=c.peer);delete COL.cursors[c.peer];delete COL.live[c.peer];send({t:'peers',list:COL.peers});colUI();reqRender();if(u)toast(u.name+' ha salido de la sala',3500)}
+function peerOpen(pr,ms=12000){return new Promise((res,rej)=>{const t=setTimeout(()=>{rej({type:'timeout'})},ms);pr.on('open',()=>{clearTimeout(t);res()});pr.on('error',e=>{clearTimeout(t);rej(e)})})}
+async function colHost(name,allow){if(COL.on||!cur)return false;
+ try{await loadPeer()}catch(e){toast('No se pudo cargar PeerJS. ¿Estás sin conexión?');return false}
+ let pr=null,code='';
+ for(let k=0;k<4;k++){code=Math.random().toString(36).slice(2,8);pr=new Peer('vellum-'+code,PEEROPT);
+  try{await peerOpen(pr);break}catch(e){try{pr.destroy()}catch(x){}pr=null;if(e.type!='unavailable-id'||k==3){toast(peerErr(e));return false}}}
+ const n=cur,was=SAVED[n.id]===sigN(n);ensurePageIds(n);n.pages.forEach(primeSig);if(was)markSaved([n]);
+ Object.assign(COL,{on:1,host:1,note:n,peer:pr,code,ro:allow?0:1,clock:Date.now(),sts:0,ssig:structSig(n),conns:[],hc:null,cursors:{},live:{},ls:null,lv:0});COL.dp.clear();
+ COL.me={id:pr.id,name,color:colorFor(pr.id)};COL.peers=[{...COL.me,pid:null}];
+ pr.on('connection',hostConn);pr.on('disconnected',()=>{try{pr.reconnect()}catch(e){}});pr.on('error',e=>{if(e.type!='peer-unavailable')toast(peerErr(e))});
+ colUI();return true}
+/* invitado */
+async function colJoin(code,name){if(COL.on){toast('Ya estás en una sala. Sal de ella antes de unirte a otra.');return}
+ try{await loadPeer()}catch(e){toast('No se pudo cargar PeerJS. ¿Estás sin conexión?');return}
+ const pr=new Peer(PEEROPT);try{await peerOpen(pr)}catch(e){try{pr.destroy()}catch(x){}toast(peerErr(e));return}
+ toast('Conectando con la sala…',15000);let joined=0;
+ const fail=m=>{if(joined)return;try{pr.destroy()}catch(e){}toast(m,8000)};
+ const c=pr.connect('vellum-'+code,{reliable:true});
+ const to=setTimeout(()=>fail('No se pudo conectar con la sala. Puede que tu red o la del anfitrión bloquee las conexiones directas.'),20000);
+ pr.on('error',e=>{clearTimeout(to);fail(peerErr(e))});
+ c.on('open',()=>c.send({t:'hi',name}));
+ c.on('data',m=>{if(!m||!m.t)return;
+  if(m.t=='hello'){if(joined)return;joined=1;clearTimeout(to);
+   const pages=m.pages.map(q=>newPage(q));let n=DB.notes.find(x=>x.room==code&&!x.bin);
+   if(n){n.pages=pages;n.title=m.title}else{n=newNote(m.title,pages);n.room=code;DB.notes.push(n)}
+   ensurePageIds(n);n.pages.forEach(primeSig);markSaved([n]);
+   Object.assign(COL,{on:1,host:0,note:n,peer:pr,code,ro:m.ro?1:0,clock:Math.max(Date.now(),m.ts||0),sts:0,ssig:structSig(n),conns:[],hc:c,cursors:{},live:{},ls:null,lv:0});COL.dp.clear();
+   COL.me={id:m.you,name,color:colorFor(m.you)};COL.peers=m.peers||[];persist();RO=false;
+   if($('#toast'))$('#toast').remove();
+   openNote(n);if(m.ro){RO=true;setTool('hand')}colUI();return}
+  if(!joined)return;
+  if(m.t=='diff')applyDiff(m);else if(m.t=='struct')applyStruct(m);else if(m.t=='cur')applyCursor(m);else if(m.t=='live')applyLive(m);
+  else if(m.t=='peers'){COL.peers=m.list||[];colUI()}
+  else if(m.t=='ro'){COL.ro=m.v?1:0;RO=!!m.v;if(RO&&tool!='hand'&&tool!='laser')setTool('hand');sub();toast(RO?'El anfitrión ha activado el modo solo lectura.':'Ya puedes dibujar.',3500)}
+  else if(m.t=='bye')colLeave('El anfitrión ha cerrado la sala.')});
+ c.on('close',()=>{clearTimeout(to);if(COL.on&&!COL.host)colLeave('Se ha perdido la conexión con la sala.');else fail('No se pudo conectar con la sala.')})}
+function colLeave(msg){if(!COL.on)return;const pr=COL.peer;try{if(COL.host)send({t:'bye'})}catch(e){}
+ setTimeout(()=>{try{pr&&pr.destroy()}catch(e){}},250);
+ Object.assign(COL,{on:0,host:0,note:null,peer:null,conns:[],hc:null,peers:[],cursors:{},live:{},ls:null,lv:0,code:''});COL.dp.clear();RO=false;
+ if(cur)sub();colUI();if(cur)render();if(msg)toast(msg,5000)}
+/* interfaz */
+const colLink=()=>location.href.split('#')[0]+'#sala='+COL.code;
+function colPanelHTML(){const note=COL.note;
+ const li=COL.peers.map(u=>{const idx=note?note.pages.findIndex(q=>q.id==u.pid):-1,me=u.id==COL.me.id;return `<div class="cpr"><i style="background:${u.color}"></i><b>${esc(u.name)}${me?' (tú)':''}</b><span>${idx>=0?'pág. '+(idx+1):''}</span>${!me&&idx>=0?`<button class="gh" data-go="${idx}">Ir</button>`:''}</div>`}).join('');
+ return (COL.host?`<p style="color:var(--sl);line-height:1.45">Comparte este enlace. Funciona mientras tú mantengas esta pestaña abierta.</p><div class="row"><input type="text" id="cplink" readonly value="${esc(colLink())}"><button class="gh" id="cpcopy">Copiar</button></div><label>Permitir que los demás dibujen<input type="checkbox" id="cprw" ${COL.ro?'':'checked'}></label>`
+  :`<p style="color:var(--sl)">Conectado a la sala <b>${esc(COL.code)}</b>${RO?' · solo lectura':''}.</p>`)
+  +`<h4>PARTICIPANTES</h4><div class="cpl">${li}</div><button class="gh" id="cpend" style="color:#DC2626">${COL.host?'Terminar sesión':'Salir de la sala'}</button>`}
+function colPanelBind(o){const q=s=>o.querySelector(s);
+ const cp=q('#cpcopy');if(cp)cp.onclick=async()=>{const v=colLink();try{await navigator.clipboard.writeText(v);cp.textContent='¡Copiado!'}catch(e){const i=q('#cplink');i.select();document.execCommand('copy');cp.textContent='¡Copiado!'}};
+ const rw=q('#cprw');if(rw)rw.onchange=()=>{COL.ro=rw.checked?0:1;send({t:'ro',v:COL.ro})};
+ o.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{if(cur===COL.note){goPage(+b.dataset.go);o.remove()}});
+ q('#cpend').onclick=()=>{if(confirm(COL.host?'¿Terminar la sesión para todos?':'¿Salir de la sala?')){o.remove();colLeave(COL.host?'Sesión terminada.':'Has salido de la sala.')}}}
+function colUI(){const b=$('#colbar');if(!b)return;b.classList.toggle('hide',!COL.on);document.body.classList.toggle('colon',!!COL.on);
+ $('#colbtn').innerHTML='<i class="dot"></i>'+ic('users')+'<span>'+COL.peers.length+'</span>';
+ if(COL.panel&&document.body.contains(COL.panel)){if(!COL.on){COL.panel.remove()}else{const c=COL.panel.querySelector('#cpb');if(c){c.innerHTML=colPanelHTML();colPanelBind(COL.panel)}}}}
+function colPanel(){if(!COL.on)return;const o=modal('<h3>Sala en directo</h3><div id="cpb" style="display:flex;flex-direction:column;gap:10px"></div>');COL.panel=o;colUI()}
+function colStartDlg(){if(!cur)return;if(COL.on){colPanel();return}
+ const o=modal(`<h3>Compartir en tiempo real</h3><p style="color:var(--sl);line-height:1.45">Se creará una sala con esta nota. Quien tenga el enlace podrá unirse mientras tú tengas esta pestaña abierta.</p><label>Tu nombre<input type="text" id="cnm" maxlength="24" placeholder="Tu nombre" value="${esc(myName())}"></label><label>Permitir que los demás dibujen<input type="checkbox" id="cal" checked></label><button class="pri" id="cgo">Crear sala</button>`);
+ o.querySelector('#cgo').onclick=async()=>{const nm=o.querySelector('#cnm').value.trim()||'Anfitrión';setMyName(nm);const al=o.querySelector('#cal').checked;o.remove();toast('Creando sala…',12000);const ok=await colHost(nm,al);if($('#toast'))$('#toast').remove();if(ok)colPanel()}}
+function colJoinDlg(pre=''){const o=modal(`<h3>Unirse a una sala</h3><label>Enlace o código<input type="text" id="cjc" placeholder="Pega el enlace o el código" value="${esc(pre)}"></label><label>Tu nombre<input type="text" id="cnm" maxlength="24" placeholder="Tu nombre" value="${esc(myName())}"></label><button class="pri" id="cgo">Unirse</button>`);
+ o.querySelector('#cgo').onclick=()=>{const v=o.querySelector('#cjc').value.trim(),m=v.match(/sala=([a-z0-9]+)/i)||v.match(/^([a-z0-9]{4,12})$/i);if(!m){toast('Código o enlace no válido.',4000);return}
+  const nm=o.querySelector('#cnm').value.trim()||'Invitado';setMyName(nm);o.remove();try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}colJoin(m[1].toLowerCase(),nm)}}
+
+function touch(){if(!cur)return;autoGrow(pg());cur.updated=Date.now();if(COL.on&&cur===COL.note){COL.dirty=1;COL.dp.add(pg())}_dirty=true;_noteDirty=true;persist();thumbs()}
 
 /* ---------- vista ---------- */
 const toDoc=(x,y)=>({x:(x-V.x)/V.z,y:(y-V.y)/V.z});
@@ -785,9 +950,9 @@ function center(){const p=pg(),cm=compact(),ppv=!$('#pp').classList.contains('hi
 function hud(){$('#pi').textContent=`Pág. ${pi+1} / ${cur.pages.length}`;$('#zl').textContent=Math.round(V.z*100)+'%'}
 function size(){const d=devicePixelRatio||1;cv.width=innerWidth*d;cv.height=innerHeight*d;render()}
 function goPage(i){if(i<0||i>=cur.pages.length)return;commitText();const pp0=pg();pi=i;sel=[];selAngle=0;if(pg().width!==pp0.width||pg().height!==pp0.height)center();hud();render();thumbs()}
-function addPage(dup){const s=pg(),n=dup?newPage(JSON.parse(JSON.stringify(s,R))):newPage({style:s.style,bg:s.bg,spacing:s.spacing,width:s.width,height:s.height,size:s.size,grow:s.grow});cur.pages.splice(pi+1,0,n);pi++;touch();hud();render()}
-function delPage(){if(cur.pages.length<2){if(confirm('Es la única página. ¿Borrar su contenido?'))clearPage();return}if(!confirm('¿Eliminar esta página?'))return;cur.pages.splice(pi,1);pi=Math.min(pi,cur.pages.length-1);touch();hud();render()}
-function clearPage(){snap();const p=pg();p.strokes=[];p.shapes=[];p.texts=[];p.images=[];sel=[];selAngle=0;touch();render()}
+function addPage(dup){if(RO)return;const s=pg(),n=dup?newPage(JSON.parse(JSON.stringify(s,R))):newPage({style:s.style,bg:s.bg,spacing:s.spacing,width:s.width,height:s.height,size:s.size,grow:s.grow});cur.pages.splice(pi+1,0,n);pi++;touch();hud();render()}
+function delPage(){if(RO)return;if(cur.pages.length<2){if(confirm('Es la única página. ¿Borrar su contenido?'))clearPage();return}if(!confirm('¿Eliminar esta página?'))return;cur.pages.splice(pi,1);pi=Math.min(pi,cur.pages.length-1);touch();hud();render()}
+function clearPage(){if(RO)return;snap();const p=pg();p.strokes=[];p.shapes=[];p.texts=[];p.images=[];sel=[];selAngle=0;touch();render()}
 
 /* ---------- interfaz del editor ---------- */
 function buildTop(){
@@ -815,6 +980,7 @@ function mark(){
 function placeSub(){$('#sub').style.left=compact()?'':(66+($('#pp').classList.contains('hide')?0:180))+'px'}
 
 function setTool(t, fromClick=false){
+ if(RO&&t!='hand'&&t!='laser'){toast('Estás en modo solo lectura',2500);return}
  if(t=='image'){$('#fi').click();return}
  commitText();
  if(INK.includes(t))lastInk=t;
@@ -982,7 +1148,7 @@ $('#sub').onchange=e=>{const t=e.target;if(t.type=='checkbox')opt(t.dataset.k,t.
 
 let _colSnapT=0,pcol=null;
 function recolor(c,key,live){pcol=c;selAct(key||'col',live)}
-function pasteSelection(dx=24, dy=24){
+function pasteSelection(dx=24, dy=24){if(RO)return;
   if(!clip||!clip.length)return;
   snap();
   const p=pg(), clones=[];
@@ -1014,7 +1180,7 @@ function alignSelection(mode){
     if(deltaX)mv(it,deltaX,0);
   });
 }
-function selAct(a, live=false){
+function selAct(a, live=false){if(RO)return;
  if(a==='paste'){pasteSelection(24,24);return;}
  if(!sel.length)return;
  if(a==='crop'){if(sel.length===1&&sel[0]&&sel[0].src&&!sel[0].locked)openCropModal(sel[0]);return;}
@@ -1510,8 +1676,8 @@ function menu(x,y,items){closeMenu();const m=document.createElement('div');m.id=
  document.body.append(m);m.style.left=Math.max(6,Math.min(x,innerWidth-m.offsetWidth-6))+'px';m.style.top=Math.max(6,Math.min(y,innerHeight-m.offsetHeight-6))+'px'}
 const closeMenu=()=>{const m=$('#menu');if(m)m.remove()};addEventListener('pointerdown',e=>{if(!e.target.closest('#menu'))closeMenu()},true);
 function modal(h){const o=document.createElement('div');o.className='ov';o.innerHTML=`<div class="mod">${h}<button class="pri" id="mx">Cerrar</button></div>`;o.onclick=e=>{if(e.target==o||e.target.id=='mx')o.remove()};document.body.append(o);return o}
-function moreMenu(){const r=$('#bm').getBoundingClientRect(),p=pg();menu(r.right+8,r.top-120,[{i:'plus',t:'Nueva página   Ctrl+N',fn:()=>addPage()},{i:'dup',t:'Duplicar página',fn:()=>addPage(1)},{i:'goto',t:'Ir a la página…',fn:()=>{const n=parseInt(prompt('Número de página',pi+1));if(n)goPage(n-1)}},{i:'trash',t:'Eliminar página',d:1,fn:delPage},'-',{i:'tplIcon',t:'Cambiar plantilla…',fn:tplDlg},{i:'fit',t:'Ajustar zoom a la hoja   0',fn:center},{i:'goto',t:'Ampliar hoja hacia abajo (+400)',fn:()=>extendPage(0,400)},{i:'goto',t:'Ampliar hoja hacia la derecha (+400)',fn:()=>extendPage(400,0)},'-',{i:'open',t:'Abrir cuaderno (.json)',fn:()=>$('#fj').click()},{i:'save',t:'Guardar cuaderno (.json)',fn:saveJSON},{i:'export',t:'Exportar página como PNG',fn:expPNG},'-',{i:'eraser',t:'Borrar el contenido de la página…',d:1,fn:()=>{if(confirm('¿Borrar todo el contenido de esta página?'))clearPage()}},'-',{i:'help',t:'Ayuda   F1',fn:help}])}
-function tplDlg(){const p=pg(),o=modal(`<h3>Plantilla de página</h3><label>Estilo<select id="t1">${[['grid','Cuadrícula'],['lined','Rayado'],['dotted','Puntos'],['blank','En blanco'],['engineering','Ingeniería'],['music','Pentagrama']].map(([v,l])=>`<option value="${v}" ${v==p.style?'selected':''}>${l}</option>`).join('')}</select></label><label>Papel<select id="t2">${[['#FFFFFF','Blanco'],['#FEFCE8','Crema'],['#0F172A','Oscuro']].map(([v,l])=>`<option value="${v}" ${v==p.bg?'selected':''}>${l}</option>`).join('')}</select></label><label>Tamaño de hoja<select id="t3">${[['l','Horizontal (1120×760)'],['v','Vertical (820×1160)'],['w','Panorámica 16:9'],['xl','Pizarra grande'],['fit','Ajustar a la ventana']].map(([v,l])=>`<option value="${v}" ${v==(p.size||(p.height>p.width?'v':'l'))?'selected':''}>${l}</option>`).join('')}</select></label><label>Hoja ampliable (crece en el borde)<input type="checkbox" id="t6" ${p.grow?'checked':''}></label><label>Espaciado<input type="range" id="t4" min="16" max="80" value="${p.spacing}"></label><label>Aplicar a todas las páginas<input type="checkbox" id="t5"></label>`);
+function moreMenu(){const r=$('#bm').getBoundingClientRect(),p=pg();menu(r.right+8,r.top-120,[{i:'plus',t:'Nueva página   Ctrl+N',fn:()=>addPage()},{i:'dup',t:'Duplicar página',fn:()=>addPage(1)},{i:'goto',t:'Ir a la página…',fn:()=>{const n=parseInt(prompt('Número de página',pi+1));if(n)goPage(n-1)}},{i:'trash',t:'Eliminar página',d:1,fn:delPage},'-',{i:'tplIcon',t:'Cambiar plantilla…',fn:tplDlg},{i:'fit',t:'Ajustar zoom a la hoja   0',fn:center},{i:'goto',t:'Ampliar hoja hacia abajo (+400)',fn:()=>extendPage(0,400)},{i:'goto',t:'Ampliar hoja hacia la derecha (+400)',fn:()=>extendPage(400,0)},'-',{i:'open',t:'Abrir cuaderno (.json)',fn:()=>$('#fj').click()},{i:'save',t:'Guardar cuaderno (.json)',fn:saveJSON},{i:'export',t:'Exportar página como PNG',fn:expPNG},{i:'users',t:COL.on?'Sala en directo…':'Compartir en tiempo real…',fn:()=>COL.on?colPanel():colStartDlg()},'-',{i:'eraser',t:'Borrar el contenido de la página…',d:1,fn:()=>{if(confirm('¿Borrar todo el contenido de esta página?'))clearPage()}},'-',{i:'help',t:'Ayuda   F1',fn:help}])}
+function tplDlg(){if(RO)return;const p=pg(),o=modal(`<h3>Plantilla de página</h3><label>Estilo<select id="t1">${[['grid','Cuadrícula'],['lined','Rayado'],['dotted','Puntos'],['blank','En blanco'],['engineering','Ingeniería'],['music','Pentagrama']].map(([v,l])=>`<option value="${v}" ${v==p.style?'selected':''}>${l}</option>`).join('')}</select></label><label>Papel<select id="t2">${[['#FFFFFF','Blanco'],['#FEFCE8','Crema'],['#0F172A','Oscuro']].map(([v,l])=>`<option value="${v}" ${v==p.bg?'selected':''}>${l}</option>`).join('')}</select></label><label>Tamaño de hoja<select id="t3">${[['l','Horizontal (1120×760)'],['v','Vertical (820×1160)'],['w','Panorámica 16:9'],['xl','Pizarra grande'],['fit','Ajustar a la ventana']].map(([v,l])=>`<option value="${v}" ${v==(p.size||(p.height>p.width?'v':'l'))?'selected':''}>${l}</option>`).join('')}</select></label><label>Hoja ampliable (crece en el borde)<input type="checkbox" id="t6" ${p.grow?'checked':''}></label><label>Espaciado<input type="range" id="t4" min="16" max="80" value="${p.spacing}"></label><label>Aplicar a todas las páginas<input type="checkbox" id="t5"></label>`);
  const ap=()=>{const all=o.querySelector('#t5').checked,sz=o.querySelector('#t3').value,gr=o.querySelector('#t6').checked;(all?cur.pages:[p]).forEach(q=>{q.style=o.querySelector('#t1').value;q.bg=o.querySelector('#t2').value;q.spacing=+o.querySelector('#t4').value;q.grow=gr?1:0;if(sz!==(q.size||(q.height>q.width?'v':'l'))){q.size=sz;const d=pageDims(sz);q.width=d[0];q.height=d[1]}});touch();center()};o.oninput=o.onchange=ap}
 function help(){modal(`<h3>Atajos</h3><table><tr><td>G L P B H E S T I R O</td><td>Mano, lazo, bolígrafo, pincel, resaltador, borrador, formas, texto, imagen, geometría, láser</td></tr><tr><td>P · B · H</td><td>Bolígrafo, pincel y resaltador comparten el botón «Escritura»; cambia entre ellos con las pestañas de su menú</td></tr><tr><td>Espacio</td><td>Mover la hoja</td></tr><tr><td>Dos dedos</td><td>Mover y hacer zoom en móvil o tableta. Si usas lápiz táctil, un dedo mueve la hoja</td></tr><tr><td>Ctrl+Z / Ctrl+Y</td><td>Deshacer / rehacer</td></tr><tr><td>Ctrl+N · 0</td><td>Nueva página · ajustar zoom</td></tr><tr><td>Supr · Ctrl+D</td><td>Eliminar · duplicar selección</td></tr><tr><td>Ctrl + rueda</td><td>Zoom (la rueda sola desplaza)</td></tr><tr><td>[ ]</td><td>Grosor o tamaño del borrador</td></tr></table><p>Haz clic de nuevo sobre la herramienta activa para mostrar u ocultar su menú. Mantén quieto el bolígrafo 0,6 s para convertir el trazo en forma perfecta. Haz zig-zag sobre un trazo para borrarlo.</p>`)}
 const dl=(u,n)=>{const a=document.createElement('a');a.href=u;a.download=n;a.click()};
@@ -1616,7 +1782,8 @@ addEventListener('beforeunload',e=>{
   e.returnValue='¿Deseas guardar como .json antes de cerrar el navegador?';
   return e.returnValue;
 });
-buildTop();$('#openjson').innerHTML=ic('open')+'Abrir .json';$('#openjson').onclick=()=>$('#fj').click();$('#openjsonEd').innerHTML=ic('open');$('#openjsonEd').onclick=()=>$('#fj').click();$('#bkall').innerHTML=ic('save')+'Respaldo (.json)';$('#hh').innerHTML=ic('help')+'Ayuda (F1)';homeRender();
+buildTop();$('#openjson').innerHTML=ic('open')+'Abrir .json';$('#openjson').onclick=()=>$('#fj').click();$('#openjsonEd').innerHTML=ic('open');$('#openjsonEd').onclick=()=>$('#fj').click();$('#joinbtn').innerHTML=ic('users')+'Unirse';$('#joinbtn').onclick=()=>colJoinDlg();$('#colbtn').onclick=colPanel;
+if(/^#sala=/.test(location.hash))setTimeout(()=>colJoinDlg(location.hash.slice(6)),400);if($('#bkall'))$('#bkall').innerHTML=ic('save')+'Respaldo (.json)';$('#hh').innerHTML=ic('help')+'Ayuda (F1)';homeRender();
 markSaved(DB.notes);
 idb.open().then(async()=>{if(!idb.db)return;
  if(DB.notes.length||DB.folders.length){await flush();return}
